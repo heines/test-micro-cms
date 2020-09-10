@@ -1,10 +1,10 @@
-<template>
-  <div class="container">
-    <div>
-      <div>{{ item.title }}</div>
-      <div v-html="item.body"></div>
-    </div>
-  </div>
+<template lang="pug">
+  .container
+    div
+      |{{ item.title }}
+    div(
+      v-html="item.body"
+      )
 </template>
 
 <script>
