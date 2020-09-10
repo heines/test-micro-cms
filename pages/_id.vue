@@ -1,14 +1,8 @@
 <template>
   <div class="container">
     <div>
-      <h1>headless cmsテストブログ</h1>
-      <div class="links">
-        <div v-for="item in items">
-          <nuxt-link :to="item.id">
-            <h2>{{ item.title }}</h2>
-          </nuxt-link>
-        </div>
-      </div>
+      <div>{{ item.title }}</div>
+      <div v-html="item.body"></div>
     </div>
   </div>
 </template>
@@ -21,15 +15,15 @@ export default {
       items: []
     };
   },
-  async asyncData() {
+  async asyncData({ params }) {
     const { data } = await axios.get(
-      "https://heine.microcms.io/api/v1/blog",
+      `https://heine.microcms.io/api/v1/blog/${params.id}`,
       {
         headers: {"X-API-KEY": process.env.API_KEY }
       }
     );
     return {
-      items: data.contents
+      item: data
     };
   }
 };
