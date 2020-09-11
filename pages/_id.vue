@@ -5,6 +5,9 @@
     div(
       v-html="item.body"
       )
+    nuxt-link(
+      to = "/"
+      ) 戻る
 </template>
 
 <script>
