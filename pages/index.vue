@@ -1,16 +1,20 @@
-<template>
-  <div class="container">
-    <div>
-      <h1>headless cmsテストブログ</h1>
-      <div class="links">
-        <div v-for="item in items">
-          <nuxt-link :to="item.id">
-            <h2>{{ item.title }}</h2>
-          </nuxt-link>
-        </div>
-      </div>
-    </div>
-  </div>
+<template lang="pug">
+  .container
+    div
+      h1
+        |micro CMSお試しブログ
+      b-card-group(
+        deck
+        )
+        b-link(
+          v-for="item in items"
+          :to="item.id"
+          )
+          b-card(
+            :title="item.title"
+            )
+            b-card-text
+              |{{ item.createdAt }}
 </template>
 
 <script>
@@ -69,9 +73,5 @@ export default {
   color: #526488;
   word-spacing: 5px;
   padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
 }
 </style>
