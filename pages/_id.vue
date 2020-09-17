@@ -1,7 +1,8 @@
 <template lang="pug">
-  div
+  .post
     h1
       |{{ item.title }}
+    div {{ item.createdAt }}
     div(
       v-html="item.body"
       )
@@ -33,4 +34,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.post {
+  padding: 5em;
+}
+</style>
