@@ -9,7 +9,7 @@
         b-link(
           v-for="(item, index) in items"
           :to="item.id"
-          :key=`post_${index}`
+          :key="item.id"
           )
           b-card(
             :title="item.title"
