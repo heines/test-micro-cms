@@ -15,7 +15,7 @@
             :title="item.title"
             )
             b-card-text
-              |{{ $dateFns.format(new Date(item.createdAt), 'yyyy/MM/dd') }}
+              |{{ $dateFns.format(new Date(item.createdAt), 'dd/MM/yyyy') }}
 </template>
 
 <script>

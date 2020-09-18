@@ -2,7 +2,7 @@
   .post
     h1
       |{{ item.title }}
-    .post__time {{ $dateFns.format(new Date(item.createdAt), 'yyyy/MM/dd hh:mm') }}
+    .post__time {{ $dateFns.format(new Date(item.createdAt), 'h:mm bbbb / eee do MMM, yyyy') }}
     div(
       v-html="item.body"
       )
