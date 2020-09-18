@@ -7,14 +7,15 @@
         deck
         )
         b-link(
-          v-for="item in items"
+          v-for="(item, index) in items"
           :to="item.id"
+          :key=`post_${index}`
           )
           b-card(
             :title="item.title"
             )
             b-card-text
-              |{{ item.createdAt }}
+              |{{ $dateFns.format(new Date(item.createdAt), 'yyyy/MM/dd') }}
 </template>
 
 <script>
@@ -22,24 +23,21 @@ import axios from "axios";
 export default {
   data() {
     return {
-      items: []
+      items: [],
     };
   },
   async asyncData() {
-    const { data } = await axios.get(
-      "https://heine.microcms.io/api/v1/blog",
-      {
-        headers: {"X-API-KEY": process.env.API_KEY }
-      }
-    );
+    const { data } = await axios.get("https://heine.microcms.io/api/v1/blog", {
+      headers: { "X-API-KEY": process.env.API_KEY },
+    });
     return {
-      items: data.contents
+      items: data.contents,
     };
-  }
+  },
 };
 </script>
 
-<style>
+<style lang="scss">
 .container {
   margin: 0 auto;
   min-height: 100vh;
@@ -50,16 +48,8 @@ export default {
 }
 
 .title {
-  font-family:
-    'Quicksand',
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
+  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   display: block;
   font-weight: 300;
   font-size: 100px;

@@ -2,7 +2,7 @@
   .post
     h1
       |{{ item.title }}
-    div {{ item.createdAt }}
+    .post__time {{ $dateFns.format(new Date(item.createdAt), 'yyyy/MM/dd hh:mm') }}
     div(
       v-html="item.body"
       )
@@ -17,25 +17,28 @@ import axios from "axios";
 export default {
   data() {
     return {
-      items: []
+      items: [],
     };
   },
   async asyncData({ params }) {
     const { data } = await axios.get(
       `https://heine.microcms.io/api/v1/blog/${params.id}`,
       {
-        headers: {"X-API-KEY": process.env.API_KEY }
+        headers: { "X-API-KEY": process.env.API_KEY },
       }
     );
     return {
-      item: data
+      item: data,
     };
-  }
+  },
 };
 </script>
 
-<style>
+<style lang="scss">
 .post {
   padding: 5em;
+  &__time {
+    text-align: right;
+  }
 }
 </style>
