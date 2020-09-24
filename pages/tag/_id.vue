@@ -1,7 +1,7 @@
 <template lang="pug">
   .tag
     h1.tag__title
-      |タグ: {{ items[0].tag.name }}
+      |タグ: {{ items[0].tag[0].name }}
     div
       b-card-group(
         card-deck
