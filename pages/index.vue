@@ -24,12 +24,20 @@
           :key="cat.id"
           )
           |{{ cat.name }}
+      div
+        b-link(
+          v-for="tag in tagList(items)"
+          :to="{ name: 'tag-id', params: { id: tag.id } }"
+          :key="tag.id"
+          )
+          |{{ tag.name }}
 </template>
 
 <script>
 import axios from "axios";
 import _uniqWith from "lodash/uniqWith";
 import _isEqual from "lodash/isEqual";
+import _flatten from "lodash/flatten";
 export default {
   data() {
     return {
@@ -56,11 +64,26 @@ export default {
         _isEqual
       );
     },
+    tagList(items) {
+      return _uniqWith(
+        _flatten(
+          items.map((x) => {
+            return x.tag.map((y) => {
+              let obj = {};
+              obj.id = y.id;
+              obj.name = y.name;
+              return obj;
+            });
+          })
+        ),
+        _isEqual
+      );
+    },
   },
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .container {
   margin: 0 auto;
   min-height: 100vh;
