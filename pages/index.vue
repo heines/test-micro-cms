@@ -25,10 +25,13 @@
           )
           |{{ cat.name }}
       div
-        b-link(
+        b-button(
           v-for="tag in tagList(items)"
           :to="{ name: 'tag-id', params: { id: tag.id } }"
           :key="tag.id"
+          size="sm"
+          variant="outline-primary"
+          class="mr-1"
           )
           |{{ tag.name }}
 </template>
