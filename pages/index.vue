@@ -34,6 +34,55 @@
           class="mr-1"
           )
           |{{ tag.name }}
+      .container__tools
+        .container__tool
+          b-button(
+            class="rounded-circle p-3"
+            size="lg"
+            variant="info"
+            @click="toggleTools"
+            )
+            BIconGridFill(
+              font-scale="2"
+              )
+          .container__subtool(
+            :class = "{ 'is-opened' : isOpened }"
+            )
+            b-button(
+              class="rounded-circle p-2"
+              size="sm"
+              variant="outline-info"
+              )
+              BIconTagFill(
+                font-scale="1"
+                )
+            b-button(
+              class="rounded-circle p-2"
+              size="sm"
+              variant="outline-info"
+              )
+              BIconList(
+                font-scale="1"
+                )
+            b-button(
+              class="rounded-circle p-2"
+              size="sm"
+              variant="outline-info"
+              )
+              BIconSearch(
+                font-scale="1"
+                )
+        .container__tool
+          b-button(
+            href="https://microcms.io/"
+            target="_blank"
+            class="rounded-circle p-3"
+            size="lg"
+            variant="primary"
+            )
+            BIconPencil(
+              font-scale="2"
+              )
 </template>
 
 <script>
@@ -41,11 +90,26 @@ import axios from "axios";
 import _uniqWith from "lodash/uniqWith";
 import _isEqual from "lodash/isEqual";
 import _flatten from "lodash/flatten";
+import {
+  BIconPencil,
+  BIconGridFill,
+  BIconTagFill,
+  BIconList,
+  BIconSearch,
+} from "bootstrap-vue";
 export default {
   data() {
     return {
       items: [],
+      isOpened: false,
     };
+  },
+  components: {
+    BIconPencil,
+    BIconGridFill,
+    BIconTagFill,
+    BIconList,
+    BIconSearch,
   },
   async asyncData() {
     const { data } = await axios.get("https://heine.microcms.io/api/v1/blog", {
@@ -82,6 +146,9 @@ export default {
         _isEqual
       );
     },
+    toggleTools() {
+      this.isOpened = !this.isOpened;
+    },
   },
 };
 </script>
@@ -94,8 +161,51 @@ export default {
   justify-content: center;
   align-items: center;
   text-align: center;
+  &__tools {
+    position: fixed;
+    display: block;
+    @media (min-width: 992px) {
+      bottom: 10em;
+      right: 2em;
+    }
+    @media (max-width: 992px) {
+      bottom: 1em;
+      right: 1em;
+    }
+  }
+  &__tool {
+    position: relative;
+    & + & {
+      margin-top: 1em;
+    }
+  }
+  &__subtool {
+    position: absolute;
+    top: -3em;
+    left: -3em;
+    opacity: 0;
+    pointer-events: none;
+    &.is-opened {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    button:first-child {
+      position: absolute;
+      top: 0;
+      left: 4em;
+    }
+    button:nth-child(2) {
+      position: absolute;
+      top: 1.5em;
+      left: 1em;
+    }
+    button:nth-child(3) {
+      position: absolute;
+      top: 5em;
+      left: 0;
+    }
+  }
 }
-
 .title {
   font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
