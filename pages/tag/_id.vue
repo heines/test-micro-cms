@@ -1,7 +1,7 @@
 <template lang="pug">
   .tag
     h1.tag__title
-      |タグ: {{ items[0].tag[0].name }}
+      |タグ: {{ getTagName($route.params.id) }}
     div
       b-card-group(
         card-deck
@@ -41,6 +41,15 @@ export default {
     return {
       items: data.contents,
     };
+  },
+  computed: {
+    getTagName() {
+      return (id) => {
+        return this.items[0].tag.filter((x) => {
+          return x.id == id;
+        })[0].name;
+      };
+    },
   },
 };
 </script>
