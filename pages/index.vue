@@ -1,88 +1,27 @@
 <template lang="pug">
-  .container
-    div
-      h1
-        |micro CMSお試しブログ
-      b-card-group(
-        card-deck
+.container
+  div
+    h1
+      |micro CMSお試しブログ
+    b-card-group(
+      card-deck
+      )
+      b-link(
+        v-for="(item, index) in items"
+        :to="item.id"
+        :key="item.id"
+        class="p-3"
         )
-        b-link(
-          v-for="(item, index) in items"
-          :to="item.id"
-          :key="item.id"
-          class="p-3"
+        b-card(
+          :title="item.title"
           )
-          b-card(
-            :title="item.title"
-            )
-            b-card-text
-              |{{ $dateFns.format(new Date(item.createdAt), 'dd/MM/yyyy') }}
-      div
-        b-link(
-          v-for="cat in catList(items)"
-          :to="{ name: 'category-id', params: { id: cat.id } }"
-          :key="cat.id"
-          )
-          |{{ cat.name }}
-      div
-        b-button(
-          v-for="tag in tagList(items)"
-          :to="{ name: 'tag-id', params: { id: tag.id } }"
-          :key="tag.id"
-          size="sm"
-          variant="outline-primary"
-          class="mr-1"
-          )
-          |{{ tag.name }}
-      .container__tools
-        .container__tool
-          b-button(
-            class="rounded-circle p-3"
-            size="lg"
-            variant="info"
-            @click="toggleTools"
-            )
-            BIconGridFill(
-              font-scale="2"
-              )
-          .container__subtool(
-            :class = "{ 'is-opened' : isOpened }"
-            )
-            b-button(
-              class="rounded-circle p-2"
-              size="sm"
-              variant="outline-info"
-              )
-              BIconTagFill(
-                font-scale="1"
-                )
-            b-button(
-              class="rounded-circle p-2"
-              size="sm"
-              variant="outline-info"
-              )
-              BIconList(
-                font-scale="1"
-                )
-            b-button(
-              class="rounded-circle p-2"
-              size="sm"
-              variant="outline-info"
-              )
-              BIconSearch(
-                font-scale="1"
-                )
-        .container__tool
-          b-button(
-            href="https://microcms.io/"
-            target="_blank"
-            class="rounded-circle p-3"
-            size="lg"
-            variant="primary"
-            )
-            BIconPencil(
-              font-scale="2"
-              )
+          b-card-text
+            |{{ $dateFns.format(new Date(item.createdAt), 'dd/MM/yyyy') }}
+    Tools
+    Modals(
+      :catList="catList(items)"
+      :tagList="tagList(items)"
+      )
 </template>
 
 <script>
@@ -90,26 +29,11 @@ import axios from "axios";
 import _uniqWith from "lodash/uniqWith";
 import _isEqual from "lodash/isEqual";
 import _flatten from "lodash/flatten";
-import {
-  BIconPencil,
-  BIconGridFill,
-  BIconTagFill,
-  BIconList,
-  BIconSearch,
-} from "bootstrap-vue";
 export default {
   data() {
     return {
       items: [],
-      isOpened: false,
     };
-  },
-  components: {
-    BIconPencil,
-    BIconGridFill,
-    BIconTagFill,
-    BIconList,
-    BIconSearch,
   },
   async asyncData() {
     const { data } = await axios.get("https://heine.microcms.io/api/v1/blog", {
@@ -146,9 +70,6 @@ export default {
         _isEqual
       );
     },
-    toggleTools() {
-      this.isOpened = !this.isOpened;
-    },
   },
 };
 </script>
@@ -179,30 +100,53 @@ export default {
       margin-top: 1em;
     }
   }
-  &__subtool {
+  &__subtools {
     position: absolute;
     top: -3em;
     left: -3em;
-    opacity: 0;
-    pointer-events: none;
-    &.is-opened {
-      opacity: 1;
+    &-btn {
+      position: absolute;
+      &:first-child {
+        top: -0.3em;
+        left: 4em;
+      }
+      &:nth-child(2) {
+        top: 1em;
+        left: 1em;
+      }
+      &:nth-child(3) {
+        top: 4em;
+        left: 0;
+      }
+    }
+  }
+
+  // transition
+  &__subtools {
+    &-btn {
+      opacity: 0;
+      pointer-events: none;
+      transition-property: opacity, transform;
+      transition-duration: 0.15s;
+      transition-timing-function: ease-in-out;
+      transform: scale(0.7, 0.7);
+    }
+    &.is-opened &-btn {
       pointer-events: auto;
-    }
-    button:first-child {
-      position: absolute;
-      top: 0;
-      left: 4em;
-    }
-    button:nth-child(2) {
-      position: absolute;
-      top: 1.5em;
-      left: 1em;
-    }
-    button:nth-child(3) {
-      position: absolute;
-      top: 5em;
-      left: 0;
+      opacity: 1;
+      transition-property: opacity, transform;
+      transition-duration: 0.15s;
+      transition-timing-function: ease-in-out;
+      transform: scale(1, 1);
+      &:nth-child(2) {
+        transition-delay: 0.07s;
+      }
+      &:nth-child(3) {
+        transition-delay: 0.14s;
+      }
+      &:hover {
+        transform: scale(1.2, 1.2);
+      }
     }
   }
 }
