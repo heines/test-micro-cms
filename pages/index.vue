@@ -1,8 +1,17 @@
 <template lang="pug">
-.container
-  div
-    h1
-      |micro CMSお試しブログ
+div
+  b-jumbotron(
+    header="Nuxt.js for Micro CMS"
+    lead="しょんぼり技術ブログ"
+    header-level="4"
+    bg-variant="secondary"
+    text-variant="light"
+    fluid
+    )
+    hr.my-4
+    p
+      |フロントエンドに関することを幅広く書きます。時々雑記。
+  .container
     b-card-group(
       card-deck
       )
@@ -76,12 +85,6 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
   &__tools {
     position: fixed;
     display: block;
@@ -166,5 +169,27 @@ export default {
   color: #526488;
   word-spacing: 5px;
   padding-bottom: 15px;
+}
+
+.jumbotron {
+  position: relative;
+  &::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    content: "";
+    background-image: url("~@/assets/hero.png");
+    background-position: right top;
+    background-repeat: no-repeat;
+    @media (min-width: 992px) {
+      background-size: contain;
+    }
+    @media (max-width: 991px) {
+      opacity: 0.3;
+      background-size: auto 50%;
+    }
+  }
 }
 </style>
