@@ -36,7 +36,12 @@ export default {
 
 <style lang="scss">
 .post {
-  padding: 5em;
+  @media (min-width: 992px) {
+    padding: 5em;
+  }
+  @media (max-width: 991px) {
+    padding: 2em;
+  }
   &__time {
     text-align: right;
   }
