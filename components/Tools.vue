@@ -112,6 +112,7 @@ export default {
     &-btn {
       position: absolute;
       background-color: rgba(#fff, 0.8);
+      border-radius: 50%;
       &:first-child {
         top: -0.3em;
         left: 4em;
