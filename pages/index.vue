@@ -16,7 +16,7 @@ div
       card-deck
       )
       b-link(
-        v-for="(item, index) in items"
+        v-for="(item, index) in showItems(items)"
         :to="item.id"
         :key="item.id"
         class="p-3"
@@ -45,9 +45,12 @@ export default {
     };
   },
   async asyncData() {
-    const { data } = await axios.get("https://heine.microcms.io/api/v1/blog", {
-      headers: { "X-API-KEY": process.env.API_KEY },
-    });
+    const { data } = await axios.get(
+      "https://heine.microcms.io/api/v1/blog?limit=100",
+      {
+        headers: { "X-API-KEY": process.env.API_KEY },
+      }
+    );
     return {
       items: data.contents,
     };
@@ -78,6 +81,9 @@ export default {
         ),
         _isEqual
       );
+    },
+    showItems(items) {
+      return items.slice(0, 10);
     },
   },
 };
