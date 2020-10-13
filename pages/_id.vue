@@ -1,15 +1,18 @@
 <template lang="pug">
   .post
-    h1
-      |{{ item.title }}
-    .post__time {{ $dateFns.format(new Date(item.createdAt), 'h:mm bbbb / eee do MMM, yyyy') }}
-    div(
-      v-html="item.body"
-      )
-    b-button(
-      to = "/"
-      variant="outline-primary"
-      ) 戻る
+    .post__header
+      h1
+        |{{ item.title }}
+      hr.my-4
+      .post__time {{ $dateFns.format(new Date(item.createdAt), 'h:mm bbbb / eee do MMM, yyyy') }}
+    .post__body
+      .post__body-text(
+        v-html="item.body"
+        )
+      b-button(
+        to = "/"
+        variant="outline-primary"
+        ) 戻る
 </template>
 
 <script>
@@ -36,14 +39,20 @@ export default {
 
 <style lang="scss">
 .post {
-  @media (min-width: 992px) {
-    padding: 5em;
-  }
-  @media (max-width: 991px) {
-    padding: 2em;
-  }
   &__time {
     text-align: right;
+  }
+  &__header {
+    background-color: #eee;
+  }
+  &__header,
+  &__body {
+    @media (min-width: 992px) {
+      padding: 5em;
+    }
+    @media (max-width: 991px) {
+      padding: 2em;
+    }
   }
 }
 </style>
