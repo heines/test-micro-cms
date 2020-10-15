@@ -32,10 +32,10 @@ export default {
       }
     },
     scroll() {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
+      const element = document.getElementById("app");
+      const y = window.pageYOffset;
+      const top = element.getBoundingClientRect().top;
+      this.pageScroll(y, top + y);
     },
   },
 };

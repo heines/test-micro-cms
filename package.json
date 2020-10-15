@@ -16,6 +16,7 @@
     "@nuxtjs/pwa": "^3.0.0-beta.20",
     "bootstrap": "^4.5.0",
     "bootstrap-vue": "^2.15.0",
+    "easing-js": "git://github.com/danro/easing-js.git",
     "jquery": "^1.9.1",
     "lodash": "^4.17.20",
     "nuxt": "^2.14.0"
