@@ -11,6 +11,8 @@ div
     hr.my-4
     p
       |フロントエンドに関することを幅広く書きます。時々雑記。
+      br
+      |staging確認用
   .container
     b-card-group(
       card-deck
