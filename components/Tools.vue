@@ -41,6 +41,7 @@
           size="sm"
           variant="outline-info"
           title="serch"
+          v-b-modal.modal-3
           )
           BIconSearch(
             font-scale="1"
