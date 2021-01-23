@@ -96,7 +96,7 @@ export default {
     right: 2em;
   }
   @media (max-width: 992px) {
-    bottom: 1em;
+    bottom: 5em;
     right: 1em;
   }
   &__box {
