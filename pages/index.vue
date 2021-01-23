@@ -26,6 +26,11 @@ div
           )
           b-card-text
             |{{ $dateFns.format(new Date(item.createdAt), 'dd/MM/yyyy') }}
+    b-button.btn-block(
+      @click="addItems"
+      variant="outline-primary"
+      :class="{ 'is-disabled': isDisabled }"
+      ) MORE
     Tools
     Modals(
       :catList="catList(items)"
@@ -38,6 +43,8 @@ import axios from "axios";
 import _uniqWith from "lodash/uniqWith";
 import _isEqual from "lodash/isEqual";
 import _flatten from "lodash/flatten";
+const ADD_ITEMS = 10;
+const FIRST_ITEMS = 10;
 export default {
   data() {
     return {
@@ -52,8 +59,16 @@ export default {
       }
     );
     return {
+      index: 10,
       items: data.contents,
+      total: data.contents.length,
+      count: 0,
     };
+  },
+  computed: {
+    isDisabled() {
+      return this.index >= this.total;
+    },
   },
   methods: {
     catList(items) {
@@ -83,13 +98,20 @@ export default {
       );
     },
     showItems(items) {
-      return items.slice(0, 10);
+      this.index = this.count * ADD_ITEMS + FIRST_ITEMS;
+      return items.slice(0, this.index);
+    },
+    addItems() {
+      this.count++;
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+.container {
+  padding-bottom: 15px;
+}
 .title {
   font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -127,6 +149,17 @@ export default {
       opacity: 0.3;
       background-size: auto 50%;
     }
+  }
+}
+
+.btn {
+  @media (min-width: 992px) {
+    margin-right: 1em;
+    margin-left: 1em;
+  }
+  &.is-disabled {
+    opacity: 0;
+    pointer-events: none;
   }
 }
 </style>
