@@ -102,6 +102,13 @@ export default {
   }
   &__box {
     position: relative;
+    & .btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 80px;
+      height: 80px;
+    }
     & + & {
       margin-top: 1em;
     }
@@ -125,6 +132,13 @@ export default {
       &:nth-child(3) {
         top: 4em;
         left: 0;
+      }
+      & .btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 40px;
       }
     }
   }
