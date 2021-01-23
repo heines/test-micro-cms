@@ -153,7 +153,7 @@ export default {
 }
 
 .btn {
-  @media (min-width: 992px) {
+  @media (min-width: 576px) {
     margin-right: 1em;
     margin-left: 1em;
   }
