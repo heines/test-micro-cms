@@ -43,6 +43,7 @@ import axios from "axios";
 import _uniqWith from "lodash/uniqWith";
 import _isEqual from "lodash/isEqual";
 import _flatten from "lodash/flatten";
+import _sortBy from "lodash/sortBy";
 const ADD_ITEMS = 10;
 const FIRST_ITEMS = 10;
 export default {
@@ -83,18 +84,21 @@ export default {
       );
     },
     tagList(items) {
-      return _uniqWith(
-        _flatten(
-          items.map((x) => {
-            return x.tag.map((y) => {
-              let obj = {};
-              obj.id = y.id;
-              obj.name = y.name;
-              return obj;
-            });
-          })
+      return _sortBy(
+        _uniqWith(
+          _flatten(
+            items.map((x) => {
+              return x.tag.map((y) => {
+                let obj = {};
+                obj.id = y.id;
+                obj.name = y.name;
+                return obj;
+              });
+            })
+          ),
+          _isEqual
         ),
-        _isEqual
+        "id"
       );
     },
     showItems(items) {
