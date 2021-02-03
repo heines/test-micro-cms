@@ -48,7 +48,7 @@
             )
   .tools__box
     b-button(
-      href="https://microcms.io/"
+      href="https://app.microcms.io/"
       target="_blank"
       class="rounded-circle p-3"
       size="lg"
