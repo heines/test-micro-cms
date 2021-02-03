@@ -3,15 +3,16 @@
   v-scroll="handleScroll"
   @click="scroll"
   )
-  BIconArrowUpSquare.to-top__icon(
+  BIconArrowUpSquareFill.to-top__icon(
+    variant="outline-secondary"
     size="lg"
     )
 </template>
 <script>
-import { BIconArrowUpSquare } from "bootstrap-vue";
+import { BIconArrowUpSquareFill } from "bootstrap-vue";
 export default {
   components: {
-    BIconArrowUpSquare,
+    BIconArrowUpSquareFill,
   },
   directives: {
     scroll: {
@@ -42,19 +43,10 @@ export default {
 </script>
 <style lang="scss">
 .to-top {
-  position: fixed;
   display: block;
-  width: 50px;
-  height: 50px;
+  width: 80px;
+  height: 80px;
   cursor: pointer;
-  @media (min-width: 992px) {
-    bottom: 5em;
-    right: 2em;
-  }
-  @media (max-width: 992px) {
-    bottom: 1em;
-    right: 1em;
-  }
   &__icon {
     width: 100%;
     height: 100%;

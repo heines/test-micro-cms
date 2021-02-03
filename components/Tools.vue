@@ -57,9 +57,12 @@
       BIconPencil(
         font-scale="2"
         )
+  .tools__box
+    ToTop
 </template>
 
 <script>
+import ToTop from "@/components/ToTop";
 import {
   BIconPencil,
   BIconGridFill,
@@ -79,6 +82,7 @@ export default {
     BIconTagFill,
     BIconList,
     BIconSearch,
+    ToTop,
   },
   methods: {
     toggleTools() {
@@ -93,11 +97,11 @@ export default {
   position: fixed;
   display: block;
   @media (min-width: 992px) {
-    bottom: 10em;
+    bottom: 5em;
     right: 2em;
   }
   @media (max-width: 992px) {
-    bottom: 5em;
+    bottom: 1em;
     right: 1em;
   }
   &__box {

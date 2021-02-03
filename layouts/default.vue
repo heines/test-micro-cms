@@ -1,17 +1,9 @@
 <template lang="pug">
   #app
     Nuxt
-    ToTop
 </template>
 
-<script>
-import ToTop from "@/components/ToTop";
-export default {
-  components: {
-    ToTop,
-  },
-};
-</script>
+<script></script>
 <style>
 html {
   font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI",
