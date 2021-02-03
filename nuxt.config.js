@@ -34,14 +34,12 @@ export default {
   /*
    ** Global CSS
    */
-  css: [],
+  css: ["@/assets/base.scss"],
   /*
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: [
-    "@/plugins/mixin-common-methods"
-  ],
+  plugins: ["@/plugins/mixin-common-methods"],
   /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components
@@ -61,11 +59,22 @@ export default {
    */
   modules: [
     /* Doc: https://bootstrap-vue.js.org */
-    "bootstrap-vue/nuxt",
+    [
+      "bootstrap-vue/nuxt",
+      {
+        css: false,
+      },
+    ],
     /* Doc: https://axios.nuxtjs.org/usage */
     "@nuxtjs/axios",
     "@nuxtjs/pwa",
+    "nuxt-webfontloader",
   ],
+  webfontloader: {
+    google: {
+      families: ["Noto+Sans+JP:400,700"],
+    },
+  },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
