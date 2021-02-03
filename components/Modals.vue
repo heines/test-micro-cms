@@ -10,7 +10,7 @@
       :key="tag.id"
       size="sm"
       variant="outline-primary"
-      class="mr-1"
+      class="mr-1 mb-1"
       )
       |{{ tag.name }}
     template(
