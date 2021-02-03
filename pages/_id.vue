@@ -54,5 +54,12 @@ export default {
       padding: 2em;
     }
   }
+  a {
+    overflow-wrap: break-word;
+  }
+  pre {
+    padding: 0.5em;
+    background-color: #ddd;
+  }
 }
 </style>
