@@ -110,7 +110,9 @@ export default {
 
 <style lang="scss" scoped>
 .container {
-  padding-bottom: 15px;
+  padding-right: 1.5rem;
+  padding-left: 1.5rem;
+  padding-bottom: 1.5rem;
 }
 .title {
   display: block;
@@ -130,6 +132,8 @@ export default {
 
 .jumbotron {
   position: relative;
+  margin-bottom: 0;
+  padding-bottom: 0;
   &::after {
     position: absolute;
     top: 0;
