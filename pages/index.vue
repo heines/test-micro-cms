@@ -15,17 +15,19 @@ div
     b-card-group(
       card-deck
       )
-      b-link(
-        v-for="(item, index) in showItems(items)"
-        :to="item.id"
-        :key="item.id"
-        class="p-3"
-        )
-        b-card(
-          :title="item.title"
+      template(
+        v-for="(item, index) in items"
+      )
+        b-link(
+          :to="item.id"
+          class="p-3"
+          v-show="index < count"
           )
-          b-card-text
-            |{{ $dateFns.format(new Date(item.createdAt), 'dd/MM/yyyy') }}
+          b-card(
+            :title="item.title"
+            )
+            b-card-text
+              |{{ $dateFns.format(new Date(item.createdAt), 'dd/MM/yyyy') }}
     b-button.btn-block(
       @click="addItems"
       variant="outline-primary"
@@ -54,21 +56,20 @@ export default {
   },
   async asyncData() {
     const { data } = await axios.get(
-      "https://heine.microcms.io/api/v1/blog?limit=100",
+      "https://heine.microcms.io/api/v1/blog?limit=1000",
       {
         headers: { "X-API-KEY": process.env.API_KEY },
       }
     );
     return {
-      index: 10,
       items: data.contents,
       total: data.contents.length,
-      count: 0,
+      count: FIRST_ITEMS,
     };
   },
   computed: {
     isDisabled() {
-      return this.index >= this.total;
+      return this.count >= this.total;
     },
   },
   methods: {
@@ -101,12 +102,8 @@ export default {
         "id"
       );
     },
-    showItems(items) {
-      this.index = this.count * ADD_ITEMS + FIRST_ITEMS;
-      return items.slice(0, this.index);
-    },
     addItems() {
-      this.count++;
+      this.count += ADD_ITEMS;
     },
   },
 };
