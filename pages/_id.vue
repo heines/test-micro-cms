@@ -33,7 +33,7 @@
     b-button(
       to = "/"
       variant="outline-primary"
-      ) 戻る
+      ) TOP
 </template>
 
 <script>
