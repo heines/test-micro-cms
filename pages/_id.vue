@@ -87,12 +87,36 @@ export default {
       padding: 2em;
     }
   }
-  a {
-    overflow-wrap: break-word;
-  }
-  pre {
-    padding: 0.5em;
-    background-color: #ddd;
+  &__body {
+    h2 {
+      margin-top: 1em;
+      padding-bottom: 0.2em;
+      border-bottom: 1px solid #ddd;
+    }
+    a {
+      overflow-wrap: break-word;
+    }
+    code {
+      padding: 0.1em 0.3em;
+      margin: 0.1em 0.3em;
+      background-color: rgba(#e83e8c, 0.05);
+      border-radius: 0.1em;
+    }
+    pre {
+      padding: 0.5em;
+      background-color: #ddd;
+      border-radius: 0.1em;
+      code {
+        padding: 0 !important;
+        margin: 0 !important;
+        background-color: transparent !important;
+        border-radius: 0 !important;
+      }
+    }
+    img {
+      width: auto;
+      max-width: 100%;
+    }
   }
 }
 </style>
