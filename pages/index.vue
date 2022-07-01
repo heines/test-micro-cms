@@ -1,8 +1,8 @@
 <template lang="pug">
 div
   b-jumbotron(
-    header="Nuxt.js for Micro CMS"
-    lead="しょんぼり技術ブログ"
+    header="しょんぼり技術ブログ"
+    lead="Nuxt.js for Micro CMS"
     header-level="4"
     bg-variant="secondary"
     text-variant="light"
