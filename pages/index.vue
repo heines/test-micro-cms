@@ -110,6 +110,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import url("https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&display=swap");
 .container {
   padding-right: 1.5rem;
   padding-left: 1.5rem;
@@ -152,6 +153,9 @@ export default {
       opacity: 0.3;
       background-size: auto 50%;
     }
+  }
+  & .display-4 {
+    font-family: "Mochiy Pop P One", sans-serif !important;
   }
 }
 
