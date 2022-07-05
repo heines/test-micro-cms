@@ -72,7 +72,10 @@ export default {
   ],
   webfontloader: {
     google: {
-      families: ["Noto+Sans+JP:400,700"],
+      families: [
+        "Noto+Sans+JP:400,700",
+        "Mochiy+Pop+P+One:400"
+      ],
     },
   },
   /*
