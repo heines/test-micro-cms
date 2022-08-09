@@ -1,9 +1,8 @@
 <template lang="pug">
-  .content
-    .content__header
-      h1.category__title
-        |カテゴリ: {{ items[0].category.name }}
-    .content__body
+  .category
+    h1.category__title
+      |カテゴリ: {{ items[0].category.name }}
+    div
       b-card-group(
         card-deck
         )
@@ -18,11 +17,10 @@
             )
             b-card-text
               |{{ $dateFns.format(new Date(item.createdAt), 'dd/MM/yyyy') }}
-    .content__footer
-      b-button(
-        to = "/"
-        variant="outline-primary"
-        ) TOP
+    b-button(
+      to = "/"
+      variant="outline-primary"
+      ) TOP
 </template>
 
 <script>

@@ -1,9 +1,8 @@
 <template lang="pug">
-  .content
-    .content__header
-      h1.content__title
-        |タグ: {{ getTagName($route.params.id) }}
-    .content__body
+  .tag
+    h1.tag__title
+      |タグ: {{ getTagName($route.params.id) }}
+    div
       b-card-group(
         card-deck
         )
@@ -18,11 +17,10 @@
             )
             b-card-text
               |{{ $dateFns.format(new Date(item.createdAt), 'dd/MM/yyyy') }}
-    .content__footer
-      b-button(
-        to = "/"
-        variant="outline-primary"
-        ) TOP
+    b-button(
+      to = "/"
+      variant="outline-primary"
+      ) TOP
 </template>
 
 <script>
@@ -55,3 +53,17 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.tag {
+  @media (min-width: 992px) {
+    padding: 5em;
+  }
+  @media (max-width: 991px) {
+    padding: 2em;
+  }
+  &__time {
+    text-align: right;
+  }
+}
+</style>
