@@ -35,8 +35,8 @@ div
       ) MORE
     Tools
     Modals(
-      :catList="catList(items)"
-      :tagList="tagList(items)"
+      :catList="catList"
+      :tagList="tagList"
       )
 </template>
 
@@ -52,6 +52,8 @@ export default {
   data() {
     return {
       items: [],
+      catList: [],
+      tagList: [],
     };
   },
   async asyncData() {
@@ -61,8 +63,36 @@ export default {
         headers: { "X-API-KEY": process.env.API_KEY },
       }
     );
+    const items = data.contents;
+    const catList = _uniqWith(
+      items.map((x) => {
+        let obj = {};
+        obj.id = x.category.id;
+        obj.name = x.category.name;
+        return obj;
+      }),
+      _isEqual
+    );
+    const tagList = _sortBy(
+      _uniqWith(
+        _flatten(
+          items.map((x) => {
+            return x.tag.map((y) => {
+              let obj = {};
+              obj.id = y.id;
+              obj.name = y.name;
+              return obj;
+            });
+          })
+        ),
+        _isEqual
+      ),
+      "id"
+    );
     return {
-      items: data.contents,
+      items: items,
+      catList: catList,
+      tagList: tagList,
       total: data.contents.length,
       count: FIRST_ITEMS,
     };
@@ -73,35 +103,6 @@ export default {
     },
   },
   methods: {
-    catList(items) {
-      return _uniqWith(
-        items.map((x) => {
-          let obj = {};
-          obj.id = x.category.id;
-          obj.name = x.category.name;
-          return obj;
-        }),
-        _isEqual
-      );
-    },
-    tagList(items) {
-      return _sortBy(
-        _uniqWith(
-          _flatten(
-            items.map((x) => {
-              return x.tag.map((y) => {
-                let obj = {};
-                obj.id = y.id;
-                obj.name = y.name;
-                return obj;
-              });
-            })
-          ),
-          _isEqual
-        ),
-        "id"
-      );
-    },
     addItems() {
       this.count += ADD_ITEMS;
     },
