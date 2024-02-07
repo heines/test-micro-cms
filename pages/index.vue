@@ -42,9 +42,6 @@ div
 
 <script>
 import axios from "axios";
-import _uniqWith from "lodash/uniqWith";
-import _isEqual from "lodash/isEqual";
-import _flatten from "lodash/flatten";
 import _sortBy from "lodash/sortBy";
 const ADD_ITEMS = 10;
 const FIRST_ITEMS = 10;
@@ -64,35 +61,30 @@ export default {
       }
     );
     const items = data.contents;
-    const catList = _uniqWith(
-      items.map((x) => {
-        let obj = {};
-        obj.id = x.category.id;
-        obj.name = x.category.name;
-        return obj;
-      }),
-      _isEqual
+    const categories = items.map((x) => {
+      return {
+        id: x.category.id,
+        name: x.category.name,
+      };
+    });
+    const catList = Array.from(
+      new Map(categories.map((cat) => [cat.id, cat])).values()
     );
-    const tagList = _sortBy(
-      _uniqWith(
-        _flatten(
-          items.map((x) => {
-            return x.tag.map((y) => {
-              let obj = {};
-              obj.id = y.id;
-              obj.name = y.name;
-              return obj;
-            });
-          })
-        ),
-        _isEqual
-      ),
-      "id"
-    );
+    const tags = items.map((x) => {
+      return x.tag.map((y) => {
+        return {
+          id: y.id,
+          name: y.name,
+        };
+      });
+    });
+    const tagList = Array.from(
+      new Map(tags.flat().map((tag) => [tag.id, tag])).values()
+    ).flat();
     return {
       items: items,
       catList: catList,
-      tagList: tagList,
+      tagList: _sortBy(tagList, "id"),
       total: data.contents.length,
       count: FIRST_ITEMS,
     };
