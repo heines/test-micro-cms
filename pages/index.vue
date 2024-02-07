@@ -35,16 +35,13 @@ div
       ) MORE
     Tools
     Modals(
-      :catList="catList(items)"
-      :tagList="tagList(items)"
+      :catList="catList"
+      :tagList="tagList"
       )
 </template>
 
 <script>
 import axios from "axios";
-import _uniqWith from "lodash/uniqWith";
-import _isEqual from "lodash/isEqual";
-import _flatten from "lodash/flatten";
 import _sortBy from "lodash/sortBy";
 const ADD_ITEMS = 10;
 const FIRST_ITEMS = 10;
@@ -52,6 +49,8 @@ export default {
   data() {
     return {
       items: [],
+      catList: [],
+      tagList: [],
     };
   },
   async asyncData() {
@@ -61,8 +60,31 @@ export default {
         headers: { "X-API-KEY": process.env.API_KEY },
       }
     );
+    const items = data.contents;
+    const categories = items.map((x) => {
+      return {
+        id: x.category.id,
+        name: x.category.name,
+      };
+    });
+    const catList = Array.from(
+      new Map(categories.map((cat) => [cat.id, cat])).values()
+    );
+    const tags = items.map((x) => {
+      return x.tag.map((y) => {
+        return {
+          id: y.id,
+          name: y.name,
+        };
+      });
+    });
+    const tagList = Array.from(
+      new Map(tags.flat().map((tag) => [tag.id, tag])).values()
+    ).flat();
     return {
-      items: data.contents,
+      items: items,
+      catList: catList,
+      tagList: _sortBy(tagList, "id"),
       total: data.contents.length,
       count: FIRST_ITEMS,
     };
@@ -73,35 +95,6 @@ export default {
     },
   },
   methods: {
-    catList(items) {
-      return _uniqWith(
-        items.map((x) => {
-          let obj = {};
-          obj.id = x.category.id;
-          obj.name = x.category.name;
-          return obj;
-        }),
-        _isEqual
-      );
-    },
-    tagList(items) {
-      return _sortBy(
-        _uniqWith(
-          _flatten(
-            items.map((x) => {
-              return x.tag.map((y) => {
-                let obj = {};
-                obj.id = y.id;
-                obj.name = y.name;
-                return obj;
-              });
-            })
-          ),
-          _isEqual
-        ),
-        "id"
-      );
-    },
     addItems() {
       this.count += ADD_ITEMS;
     },
