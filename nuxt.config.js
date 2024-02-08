@@ -1,6 +1,8 @@
+import { defineNuxtConfig } from "@nuxt/bridge";
 require("dotenv").config();
 const { API_KEY } = process.env;
-export default {
+export default defineNuxtConfig({
+  bridge: false,
   /*
    ** Nuxt target
    ** See https://nuxtjs.org/api/configuration-target
@@ -86,4 +88,4 @@ export default {
    ** See https://nuxtjs.org/api/configuration-build/
    */
   build: {},
-};
+});
