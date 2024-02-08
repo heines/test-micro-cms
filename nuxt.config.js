@@ -2,7 +2,9 @@ import { defineNuxtConfig } from "@nuxt/bridge";
 require("dotenv").config();
 const { API_KEY } = process.env;
 export default defineNuxtConfig({
-  bridge: false,
+  bridge: {
+    nitro: true,
+  },
   /*
    ** Nuxt target
    ** See https://nuxtjs.org/api/configuration-target
@@ -31,10 +33,7 @@ export default defineNuxtConfig({
   /*
    ** Global CSS
    */
-  css: [
-    "@/assets/base.scss",
-    "@/assets/content.scss"
-  ],
+  css: ["@/assets/base.scss", "@/assets/content.scss"],
   /*
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
@@ -51,14 +50,13 @@ export default defineNuxtConfig({
   buildModules: [
     /* Doc: https://github.com/nuxt-community/eslint-module */
     "@nuxtjs/eslint-module",
-    /* Simple usage */
-    "@nuxtjs/date-fns",
   ],
   /*
    ** Nuxt.js modules
    */
   modules: [
     /* Doc: https://bootstrap-vue.js.org */
+    // "dayjs-nuxt",
     [
       "bootstrap-vue/nuxt",
       {
@@ -70,12 +68,13 @@ export default defineNuxtConfig({
     "@nuxtjs/pwa",
     "nuxt-webfontloader",
   ],
+  dayjs: {
+    locales: ["ja"],
+    defaultLocale: "ja",
+  },
   webfontloader: {
     google: {
-      families: [
-        "Noto+Sans+JP:400,700",
-        "Mochiy+Pop+P+One:400"
-      ],
+      families: ["Noto+Sans+JP:400,700", "Mochiy+Pop+P+One:400"],
     },
   },
   /*

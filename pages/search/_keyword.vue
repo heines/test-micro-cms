@@ -16,8 +16,8 @@
         b-card(
           :title="item.title"
           )
-          b-card-text
-            |{{ $dateFns.format(new Date(item.createdAt), 'dd/MM/yyyy') }}
+          //- b-card-text
+          //-   |{{ $dayjs(item.createdAt).format('dd/MM/yyyy') }}
   .content__footer
     b-button(
       to = "/"

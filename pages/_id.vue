@@ -24,8 +24,8 @@
           :to="{name: 'category-id', params: { id: item.category.id } }"
         )
           |{{ item.category.name }}
-    .post__time
-      |{{ $dateFns.format(new Date(item.createdAt), 'h:mm bbbb / eee do MMM, yyyy') }}
+    //- .post__time
+    //-   |{{ $dayjs(new Date(item.createdAt)).format('h:mm bbbb / eee do MMM, yyyy') }}
   .post__body
     .post__body-text(
       v-html="item.body"
