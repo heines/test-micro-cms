@@ -30,10 +30,7 @@ export default {
   /*
    ** Global CSS
    */
-  css: [
-    "@/assets/base.scss",
-    "@/assets/content.scss"
-  ],
+  css: ["@/assets/base.scss", "@/assets/content.scss"],
   /*
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
@@ -71,10 +68,7 @@ export default {
   ],
   webfontloader: {
     google: {
-      families: [
-        "Noto+Sans+JP:400,700",
-        "Mochiy+Pop+P+One:400"
-      ],
+      families: ["Noto+Sans+JP:400,700", "Mochiy+Pop+P+One:400"],
     },
   },
   /*
