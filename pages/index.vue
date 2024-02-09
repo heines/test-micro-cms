@@ -55,7 +55,7 @@ export default {
   },
   async asyncData() {
     const { data } = await axios.get(
-      "https://heine.microcms.io/api/v1/blog?limit=1000",
+      `https://${process.env.SERVICE_DOMAIN}.microcms.io/api/v1/blog?limit=1000`,
       {
         headers: { "X-API-KEY": process.env.API_KEY },
       }

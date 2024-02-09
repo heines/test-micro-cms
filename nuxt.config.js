@@ -1,5 +1,5 @@
 require("dotenv").config();
-const { API_KEY } = process.env;
+const { API_KEY, SERVICE_DOMAIN } = process.env;
 export default {
   /*
    ** Nuxt target
@@ -12,6 +12,7 @@ export default {
    */
   env: {
     API_KEY,
+    SERVICE_DOMAIN,
   },
   head: {
     title: "しょんぼり技術ブログ",
