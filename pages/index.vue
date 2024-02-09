@@ -42,7 +42,6 @@ div
 
 <script>
 import axios from "axios";
-import _sortBy from "lodash/sortBy";
 const ADD_ITEMS = 10;
 const FIRST_ITEMS = 10;
 export default {
@@ -55,7 +54,7 @@ export default {
   },
   async asyncData() {
     const { data } = await axios.get(
-      "https://heine.microcms.io/api/v1/blog?limit=1000",
+      `https://${process.env.SERVICE_DOMAIN}.microcms.io/api/v1/blog?limit=1000`,
       {
         headers: { "X-API-KEY": process.env.API_KEY },
       }
@@ -80,11 +79,15 @@ export default {
     });
     const tagList = Array.from(
       new Map(tags.flat().map((tag) => [tag.id, tag])).values()
-    ).flat();
+    )
+      .flat()
+      .sort((a, b) => {
+        return a.name > b.name ? 1 : 1;
+      });
     return {
       items: items,
       catList: catList,
-      tagList: _sortBy(tagList, "id"),
+      tagList: tagList,
       total: data.contents.length,
       count: FIRST_ITEMS,
     };

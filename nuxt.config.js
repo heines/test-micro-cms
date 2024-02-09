@@ -1,11 +1,6 @@
 require("dotenv").config();
-const { API_KEY } = process.env;
+const { API_KEY, SERVICE_DOMAIN } = process.env;
 export default {
-  /*
-   ** Nuxt rendering mode
-   ** See https://nuxtjs.org/api/configuration-mode
-   */
-  mode: "universal",
   /*
    ** Nuxt target
    ** See https://nuxtjs.org/api/configuration-target
@@ -17,6 +12,7 @@ export default {
    */
   env: {
     API_KEY,
+    SERVICE_DOMAIN,
   },
   head: {
     title: "しょんぼり技術ブログ",
@@ -34,10 +30,7 @@ export default {
   /*
    ** Global CSS
    */
-  css: [
-    "@/assets/base.scss",
-    "@/assets/content.scss"
-  ],
+  css: ["@/assets/base.scss", "@/assets/content.scss"],
   /*
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
@@ -75,10 +68,7 @@ export default {
   ],
   webfontloader: {
     google: {
-      families: [
-        "Noto+Sans+JP:400,700",
-        "Mochiy+Pop+P+One:400"
-      ],
+      families: ["Noto+Sans+JP:400,700", "Mochiy+Pop+P+One:400"],
     },
   },
   /*
